@@ -35,3 +35,19 @@ jobs:
       - name: Build project
         run: |
           npm run build
+
+      - uses: azure/login@v1
+      with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+    
+      - name: Upload to blob storage
+        uses: azure/CLI@v1
+        with:
+          inlineScript: |
+              az storage blob upload-batch --account-name samplewebsa --auth-mode key -s $GITHUB_WORKSPACE/dist/my-app-ejemplo1 -d '$web'
+  
+      # Azure logout
+      - name: logout
+        run: |
+              az logout
+        if: always()
