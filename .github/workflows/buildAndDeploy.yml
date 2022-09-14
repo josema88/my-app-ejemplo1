@@ -45,7 +45,7 @@ jobs:
         uses: azure/CLI@v1
         with:
           inlineScript: |
-              az storage blob upload-batch --account-name samplewebsa --auth-mode key -s $GITHUB_WORKSPACE/dist/my-app-ejemplo1 -d '$web'
+              az storage blob upload-batch --overwrite --account-name samplewebsa --auth-mode key -s $GITHUB_WORKSPACE/dist/my-app-ejemplo1 -d '$web'
   
       # Azure logout
       - name: logout
